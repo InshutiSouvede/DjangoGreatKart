@@ -1,3 +1,5 @@
+from tokenize import single_quoted
+from urllib import request
 from django.shortcuts import get_object_or_404, render
 
 from category.models import Category
@@ -22,3 +24,16 @@ def store(request, category_slug = None):
         'count':products_count
     }
     return render(request, 'store/store.html',context)
+
+def product_detail(request,category_slug,product_slug):
+    try:
+        #get object->category->slug syntax
+        single_product = Product.objects.get(category__slug = category_slug, slug=product_slug)
+    except Exception as e:
+        return e
+    
+    context = {
+        'single_product':single_product
+    }
+        
+    return render(request,'store/product_detail.html',context)
