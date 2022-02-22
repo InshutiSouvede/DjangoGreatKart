@@ -4,6 +4,7 @@ from store import views
 
 urlpatterns = [
     path('', views.store,name='store'),
+    path('search/', views.search,name='search'),#or just change the urls below so you wont have to care about order
     path('<slug:category_slug>/', views.store,name='product_by_category'),
     path('<slug:category_slug>/<slug:product_slug>', views.product_detail,name='product_detail'),
 ]
